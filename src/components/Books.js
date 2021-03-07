@@ -7,7 +7,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 import {giveMeMyBooks} from "../actions";
 import {BookDetails} from "./BookDetails";
-import {BooksPagination} from "./BooksPagination";
+import {BooksPagination, BookPaginationClassWithRouter} from "./BooksPagination";
 
 import './Books.css';
 import {BookTitle} from "./BookTitle";
@@ -27,7 +27,7 @@ export function Books() {
 
     return (
         <div className="books">
-            <BooksPagination pages={pages} page={page}/>
+            <BookPaginationClassWithRouter pages={pages} page={page}/>
             <List>
                 {books.map(item => (
                     <ListItem key={item.id}>
