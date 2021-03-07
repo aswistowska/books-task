@@ -4,7 +4,8 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    useParams
+    useParams,
+    useHistory
 } from "react-router-dom";
 
 import List from '@material-ui/core/List';
@@ -54,9 +55,15 @@ function BookDetails({book}) {
 }
 
 function BasicPagination({pages, page}) {
+    let history = useHistory();
+
+    function handlePageChange(event, page) {
+        history.push(`/${page}`);
+    }
+
     return (
         <div>
-            <Pagination count={pages} color="primary" page={page}/>
+            <Pagination count={pages} color="primary" page={page} onChange={handlePageChange}/>
         </div>
     );
 }
