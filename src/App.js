@@ -5,6 +5,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
+import Pagination from '@material-ui/lab/Pagination';
 
 import './App.css';
 import {giveMeMyBooks} from "./actions";
@@ -46,10 +47,19 @@ function BookDetails({book}) {
     )
 }
 
+function BasicPagination({pages}) {
+    return (
+        <div>
+            <Pagination count={pages} color="primary" />
+        </div>
+    );
+}
+
 function App() {
 
     const dispatch = useDispatch();
     const books = useSelector(state => state.books)
+    const pages = useSelector(state =>state.pages )
 
     useEffect(() => {
         dispatch(giveMeMyBooks())
@@ -64,6 +74,7 @@ function App() {
                     </ListItem>
                 ))}
             </List>
+            <BasicPagination pages={pages}/>
         </div>
     );
 }

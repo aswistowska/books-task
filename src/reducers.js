@@ -1,5 +1,6 @@
 const initialState = {
-    books: []
+    books: [],
+    pages: 0,
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -8,7 +9,8 @@ export default function rootReducer(state = initialState, action) {
         case 'STORE_BOOKS': {
             return {
                 ...state,
-                books: action.books
+                books: action.books,
+                pages: action.pages
             }
         }
         default:
