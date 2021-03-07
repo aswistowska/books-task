@@ -1,5 +1,11 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    useParams
+} from "react-router-dom";
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -47,26 +53,28 @@ function BookDetails({book}) {
     )
 }
 
-function BasicPagination({pages}) {
+function BasicPagination({pages, page}) {
     return (
         <div>
-            <Pagination count={pages} color="primary" />
+            <Pagination count={pages} color="primary" page={page}/>
         </div>
     );
 }
 
-function App() {
-
+function Books() {
     const dispatch = useDispatch();
-    const books = useSelector(state => state.books)
-    const pages = useSelector(state =>state.pages )
+    const books = useSelector(state => state.books);
+    const pages = useSelector(state =>state.pages );
+
+    let { page } = useParams();
+    page = parseInt(page || 1);
 
     useEffect(() => {
-        dispatch(giveMeMyBooks())
-    }, [dispatch])
+        dispatch(giveMeMyBooks({page}))
+    }, [dispatch, page])
 
     return (
-        <div className="App">
+        <div className="Books">
             <List>
                 {books.map(item => (
                     <ListItem key={item.id}>
@@ -74,8 +82,23 @@ function App() {
                     </ListItem>
                 ))}
             </List>
-            <BasicPagination pages={pages}/>
+            <BasicPagination pages={pages} page={page}/>
         </div>
+    )
+}
+
+function App() {
+    return (
+        <Router>
+            <Switch>
+                <Route path="/:page">
+                    <Books />
+                </Route>
+                <Route path="/">
+                    <Books />
+                </Route>
+            </Switch>
+        </Router>
     );
 }
 
