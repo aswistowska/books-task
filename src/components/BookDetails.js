@@ -8,8 +8,8 @@ export function BookDetails({book}) {
         <>
             <Typography
                 component="span"
-                variant="h5"
-                color="textPrimary"
+                variant="h6"
+                color="textSecondary"
             >
                 {book.book_author}
             </Typography>

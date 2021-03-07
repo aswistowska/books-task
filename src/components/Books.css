@@ -1,0 +1,6 @@
+.books .MuiPagination-root {
+  display: flex;
+}
+.books .MuiPagination-ul {
+  margin: auto;
+}

@@ -9,6 +9,10 @@ import {giveMeMyBooks} from "../actions";
 import {BookDetails} from "./BookDetails";
 import {BooksPagination} from "./BooksPagination";
 
+import './Books.css';
+import {BookTitle} from "./BookTitle";
+
+
 export function Books() {
     const dispatch = useDispatch();
     const books = useSelector(state => state.books);
@@ -22,12 +26,12 @@ export function Books() {
     }, [dispatch, page])
 
     return (
-        <div className="Books">
+        <div className="books">
             <BooksPagination pages={pages} page={page}/>
             <List>
                 {books.map(item => (
                     <ListItem key={item.id}>
-                        <ListItemText primary={item.book_title} secondary={<BookDetails book={item}/>}/>
+                        <ListItemText primary={<BookTitle book={item}/>} secondary={<BookDetails book={item}/>}/>
                     </ListItem>
                 ))}
             </List>
